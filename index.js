@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 var passenger = new Schema({
 	firstName : String,
 	lastName  : String,
-	startExc  : Date,
-	endExc    : Date,
+// 	startExc  : Date,
+// 	endExc    : Date,
 // 	img       : String; 
 });
 
@@ -24,9 +24,9 @@ app.post('/add',function(request, response){
 	var passenger = new excPass();
 	passenger.firstName = request.body.firstName;
 	passenger.lastName = request.body.lastName;
-	passenger.startExc = request.body.startExc;
-	passenger.endExc = request.body.endExc;
-	product.save(function(err, savedPassengers){
+// 	passenger.startExc = request.body.startExc;
+// 	passenger.endExc = request.body.endExc;
+	passenger.save(function(err, savedPassengers){
 		if (err) {
 			response.status(500).send({error: 'Could not save passenger info'});
 		} else {
