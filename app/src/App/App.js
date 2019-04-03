@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HttpService from '../services/http-service';
 
 class App extends Component {
   render() {
