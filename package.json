@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Mikoreiz/signageExclusions/issues"
   },
-  "homepage": "https://github.com/Mikoreiz/signageExclusions#readme"
+  "homepage": "https://github.com/Mikoreiz/signageExclusions#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.21"
+  }
 }
