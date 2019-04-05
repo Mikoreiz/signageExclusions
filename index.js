@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/signageExclusion', {useNewUrlParser: true});
 var Schema = mongoose.Schema;
+app.set("view engine", "pug");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -18,9 +19,15 @@ app.use(function(req, res, next) {
 var passenger = new Schema({
 	firstName : String,
 	lastName  : String,
-// 	startExc  : Date,
-// 	endExc    : Date,
-// 	img       : String; 
+    sex       : String,
+    eyes      : String,
+    hair      : String,
+    feet      : String,
+    inch      : String,
+    weight    : String,
+    race      : String,
+    from      : Date,
+    to        : Date
 });
 
 var excPass = mongoose.model('passenger', passenger);
@@ -30,14 +37,22 @@ app.post('/add',function(request, response){
 	var passenger = new excPass();
 	passenger.firstName = request.body.firstName;
 	passenger.lastName = request.body.lastName;
-// 	passenger.startExc = request.body.startExc;
-// 	passenger.endExc = request.body.endExc;
+	passenger.sex = request.body.sex;
+	passenger.eyes = request.body.eyes;
+	passenger.hair = request.body.hair;
+	passenger.feet = request.body.feet;
+	passenger.inch = request.body.inch;
+	passenger.weight = request.body.weight;
+	passenger.race = request.body.race;
+	passenger.from = request.body.from;
+	passenger.to = request.body.to;
 	passenger.save(function(err, savedPassengers){
 		if (err) {
 			response.status(500).send({error: 'Could not save passenger info'});
 		} else {
-			response.send(savedPassengers);
+			console.log(passenger);
 		}
+		response.redirect('/addPage');
 	});
 });
 
@@ -50,6 +65,11 @@ app.get('/screen',function(request, response){
 			response.send(passengers);
 		}
 	});
+});
+
+app.get('/addPage', function (request, response)
+{
+    response.render('adder');
 });
 
 //UPDATE

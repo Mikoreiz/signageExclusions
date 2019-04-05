@@ -1,0 +1,76 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css')
+  body
+    div.card.mx-auto.m-5.border(style='width: 37rem; height: 100%;')
+      div.card-header(style='background-color: #800000;')
+        p.row.justify-content-center.pt-3(style='color: white; font-size: 2em') ADD PASSENGER TO EXCLUSION LIST
+      div.card-body
+        form(method='POST', action='/add')
+          div.form-row.m-2
+            div.form-group.col-sm-5.mr-2
+              label First Name
+              input.form-control(type='text', name='firstName')
+            div.form-group.col-sm-5.ml-2
+              label Last Name
+              input.form-control(type='text', name='lastName')
+          div.form-row.m-2
+            div.form-group.col-sm-2.mr-2
+              label Sex
+              select.form-control(type='text', name='sex')
+                option Male
+                option Female
+            div.form-group.col-sm-4.ml-2.mr-2
+              label Eye Color
+              input.form-control(type='text', name='eyes')
+            div.form-group.col-md-4.ml-2
+              label Hair Color
+              input.form-control(type='text', name='hair')
+          div.form-row.m-2
+            div.form-group.col-sm-2.mr-2
+              label Height
+              select.form-control(type='text', name='feet')
+                option 1
+                option 2
+                option 3
+                option 4
+                option(selected='') 5
+                option 6
+                option 7
+                option 8
+            div.form-group.col-sm-2.mr-2
+              label(style='color:white;') .
+              select.form-control(type='text', name='inch')
+                option 1
+                option 2
+                option 3
+                option 4
+                option 5
+                option 6
+                option 7
+                option 8
+                option 9
+                option 10
+                option 11
+            div.form-group.col-sm-2.mr-1.ml-2
+              label Weight
+              input.form-control(type='text', name='weight')
+            div.form-group.col-sm-4.ml-2
+              label Race
+              input.form-control(type='text', name='race')
+          div.form-row.m-2
+            div.form-group.col-sm-4.mr-2
+              label Exclusion From
+              input.form-control(type='text', name='from' placeholder='MM/DD/YY')
+            div.form-group.col-sm-4.ml-2
+              label To
+              input.form-control(type='text', name='to' placeholder='MM/DD/YY')
+          div.form-row.justify-content-center.mt-4
+            div.form-group.col-sm-2
+              button.form-control.btn.btn-primary(type='submit') Submit
+
+      		
+        script(type='text/javascript', src='/Users/Macbook/Documents/GitHub/signageExclusions/index.js')
