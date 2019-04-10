@@ -6,9 +6,9 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css')
   body
     div.card.mx-auto.m-5.border(style='width: 37rem; height: 100%;')
-      div.card-header(style='background-color: #800000;')
-        p.row.justify-content-center.pt-3(style='color: white; font-size: 2em') ADD PASSENGER TO EXCLUSION LIST
-      div.card-body
+      div.card-header.font-weight-light(style='background-color: #800000;')
+        p.row.justify-content-center.pt-3(style='color: white; font-size: 2em') ADD TO EXCLUSIONS LIST
+      div.card-body.pl-5.ml-2.font-weight-light
         form(method='POST', action='/add')
           div.form-row.m-2
             div.form-group.col-sm-5.mr-2
@@ -68,9 +68,9 @@ html
             div.form-group.col-sm-4.ml-2
               label To
               input.form-control(type='text', name='to' placeholder='MM/DD/YY')
-          div.form-row.justify-content-center.mt-4
-            div.form-group.col-sm-2
-              button.form-control.btn.btn-primary(type='submit') Submit
+          div.form-row.justify-content-center.mt-4.mr-4
+            div.form-group.col-sm-3
+              button.form-control.btn.btn-dark(type='submit') Submit
 
       		
         script(type='text/javascript', src='/Users/Macbook/Documents/GitHub/signageExclusions/index.js')
