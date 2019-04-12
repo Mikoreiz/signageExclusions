@@ -5,10 +5,33 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/signageExclusion', {useNewUrlParser: true});
 var Schema = mongoose.Schema;
-app.set("view engine", "pug");
+var multer  = require('multer');
 
+app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'app/src/passenger/uploads')));
+
+
+var storage = multer.diskStorage({
+	destination: function(request, file, callback) {
+		callback(null, 'app/src/passenger/uploads/');
+	},
+	filename: function(request, file, callback) {
+		callback(null, file.originalname);
+	}
+});
+
+var imgFilter = (request, file, callback) => {
+	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+};
+
+var upload = multer({storage: storage, imgFilter: imgFilter});
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -27,13 +50,18 @@ var passenger = new Schema({
     weight    : String,
     race      : String,
     from      : Date,
-    to        : Date
+    to        : Date,
+    image     : String
 });
 
 var excPass = mongoose.model('passenger', passenger);
 
+
+//<img className="card-img-top" src={require({this.props.passenger.image})} alt="passenger"></img>
+//<img className="card-img-top" src={require("./uploads/ironcat.jpg")} alt="passenger"></img>
 //CREATE
-app.post('/add',function(request, response){
+app.post('/add', upload.single('image'), function(request, response){
+	console.log(request.file);
 	var passenger = new excPass();
 	passenger.firstName = request.body.firstName;
 	passenger.lastName = request.body.lastName;
@@ -46,6 +74,7 @@ app.post('/add',function(request, response){
 	passenger.race = request.body.race;
 	passenger.from = request.body.from;
 	passenger.to = request.body.to;
+	passenger.image = "./uploads/" + request.file.originalname;
 	passenger.save(function(err, savedPassengers){
 		if (err) {
 			response.status(500).send({error: 'Could not save passenger info'});

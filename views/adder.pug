@@ -4,12 +4,12 @@ html
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css')
-  body
+  body(style='background-color:#DFDFDF')
     div.card.mx-auto.m-5.border(style='width: 37rem; height: 100%; box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);')
       div.card-header.font-weight-light(style='background-color: #800000;')
         p.row.justify-content-center.pt-3(style='color: white; font-size: 2em') ADD TO EXCLUSIONS LIST
       div.card-body.pl-5.ml-2.font-weight-light
-        form(method='POST', action='/add')
+        form(method='POST', enctype="multipart/form-data", action='/add')
           div.form-row.m-2
             div.form-group.col-sm-5.mr-2
               label First Name
@@ -69,9 +69,12 @@ html
             div.form-group.col-sm-4.ml-2
               label To
               input.form-control(type='text', name='to' placeholder='MM/DD/YY')
+          div.form-row.m-2
+            div.col-sm-10.mr-2
+              label Photo
+            div.form-row.ml-1
+                input(type='file' name='image')
           div.form-row.justify-content-center.mt-4.mr-4
             div.form-group.col-sm-3
               button.form-control.btn.btn-dark(type='submit') Submit
-
-      		
         script(type='text/javascript', src='/Users/Macbook/Documents/GitHub/signageExclusions/index.js')
