@@ -5,7 +5,7 @@ html
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css')
   body
-    div.card.mx-auto.m-5.border(style='width: 37rem; height: 100%;')
+    div.card.mx-auto.m-5.border(style='width: 37rem; height: 100%; box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.25);')
       div.card-header.font-weight-light(style='background-color: #800000;')
         p.row.justify-content-center.pt-3(style='color: white; font-size: 2em') ADD TO EXCLUSIONS LIST
       div.card-body.pl-5.ml-2.font-weight-light
@@ -21,6 +21,7 @@ html
             div.form-group.col-sm-2.mr-2
               label Sex
               select.form-control(type='text', name='sex')
+                option #{''}
                 option Male
                 option Female
             div.form-group.col-sm-4.ml-2.mr-2

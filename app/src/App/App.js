@@ -39,8 +39,8 @@ class App extends Component {
 
 	render() {
 		return (
-		<div className="App">
-			<h5 className="display-4 m-3">Exclusions List</h5>
+		<div className="App mb-5">
+			<h5 className="display-4 m-3 font-weight-bold">EXCLUSIONS LIST</h5>
 			<div className="container-fluid App-main">
 				 <div class="card-group">
 					{this.passengerList()}

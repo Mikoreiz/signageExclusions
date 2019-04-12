@@ -5,7 +5,7 @@ import moment from 'moment';
 class Passenger extends Component {
 	render() {
 		return(
-		<div className="card passenger border border-dark m-2">
+		<div className="card passenger m-1 mt-3 mb-3">
 			<div className="card-block">
 				<h3 className="card-title pt-2">{this.props.passenger.firstName}{' '}
 									   	   {this.props.passenger.lastName}</h3>
