@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/signageExclusion', {useNewUrlParser: true});
 var Schema = mongoose.Schema;
-var multer  = require('multer');
+var multer = require('multer');
 
 app.set("view engine", "pug");
 app.use(bodyParser.json());
