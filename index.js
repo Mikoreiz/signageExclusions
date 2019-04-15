@@ -10,12 +10,12 @@ var multer  = require('multer');
 app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'app/src/passenger/uploads')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 var storage = multer.diskStorage({
 	destination: function(request, file, callback) {
-		callback(null, 'app/src/passenger/uploads/');
+		callback(null, 'uploads/');
 	},
 	filename: function(request, file, callback) {
 		callback(null, file.originalname);
@@ -74,7 +74,7 @@ app.post('/add', upload.single('image'), function(request, response){
 	passenger.race = request.body.race;
 	passenger.from = request.body.from;
 	passenger.to = request.body.to;
-	passenger.image = "./uploads/" + request.file.originalname;
+	passenger.image = "http://localhost:3001/" + request.file.originalname;
 	passenger.save(function(err, savedPassengers){
 		if (err) {
 			response.status(500).send({error: 'Could not save passenger info'});
@@ -96,8 +96,7 @@ app.get('/screen',function(request, response){
 	});
 });
 
-app.get('/addPage', function (request, response)
-{
+app.get('/addPage', function (request, response {
     response.render('adder');
 });
 

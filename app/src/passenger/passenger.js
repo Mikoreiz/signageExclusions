@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './passenger.css';
 import moment from 'moment';
 
+
 class Passenger extends Component {
 	render() {
 		return(
@@ -9,7 +10,7 @@ class Passenger extends Component {
 			<div className="card-block">
 				<h3 className="card-title pt-2">{this.props.passenger.firstName}{' '}
 									   	   {this.props.passenger.lastName}</h3>
-                  <img className="card-img-top" src={require(this.props.passenger.image)} alt="passenger"></img>
+                  <img className="card-img-top" src={this.props.passenger.image} alt="passenger"></img>
 				  <p className="card-text"><b>Sex:</b> {this.props.passenger.sex}</p>
 				  <p className="card-tex"><b>Race:</b> {this.props.passenger.race}</p>
 				  <p className="card-text"><b>Eye Color:</b> {this.props.passenger.eyes}</p>
