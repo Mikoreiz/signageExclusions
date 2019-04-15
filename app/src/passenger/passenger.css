@@ -1,7 +1,7 @@
 body {
 }
 .passenger {
-	width: 32rem;
+	width: 30rem;
 	height: auto;
 	box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.12);
 }
