@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import HttpService from '../services/http-services';
 import Passenger from '../passenger/passenger';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const http = new HttpService();
 
@@ -36,15 +38,15 @@ class App extends Component {
 		);
 		return (list);
 	}
-
-	render() {
+	
+	render(){
 		return (
 		<div className="App mb-5">
 			<h5 className="display-4 m-3 font-weight-bold">EXCLUSIONS LIST</h5>
 			<div className="container-fluid App-main">
-				 <div class="card-group">
+				<div className="card-group">
 					{this.passengerList()}
-				 </div>
+				</div>
 			</div>
 		</div>
 		);

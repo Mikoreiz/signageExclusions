@@ -1,115 +1,153 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/signageExclusion', {useNewUrlParser: true});
-var Schema = mongoose.Schema;
-var multer = require('multer');
+const express = require("express")
+const paginate = require("express-paginate")
+const app = express()
+const path = require("path")
+const bodyParser = require("body-parser")
+const mongoose = require("mongoose")
+const db = mongoose.connect("mongodb://localhost/signageExclusion", {
+  useNewUrlParser: true
+})
+const Schema = mongoose.Schema
+const multer = require("multer")
 
-app.set("view engine", "pug");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(__dirname + "/public"))
+app.set("view engine", "pug")
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, "uploads")))
+app.locals.moment = require("moment")
 
+const storage = multer.diskStorage({
+  destination: function(request, file, callback) {
+    callback(null, "uploads/")
+  },
+  filename: function(request, file, callback) {
+    callback(null, file.originalname)
+  }
+})
 
-var storage = multer.diskStorage({
-	destination: function(request, file, callback) {
-		callback(null, 'uploads/');
-	},
-	filename: function(request, file, callback) {
-		callback(null, file.originalname);
-	}
-});
+const imgFilter = (request, file, callback) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    callback(null, true)
+  } else {
+    callback(null, false)
+  }
+}
 
-var imgFilter = (request, file, callback) => {
-	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-		cb(null, true);
-	} else {
-		cb(null, false);
-	}
-};
-
-var upload = multer({storage: storage, imgFilter: imgFilter});
-
+const upload = multer({ storage: storage, imgFilter: imgFilter })
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  next()
+})
 
-var passenger = new Schema({
-	firstName : String,
-	lastName  : String,
-    sex       : String,
-    eyes      : String,
-    hair      : String,
-    feet      : String,
-    inch      : String,
-    weight    : String,
-    race      : String,
-    from      : Date,
-    to        : Date,
-    image     : String
-});
+const passenger = new Schema({
+  firstName: String,
+  lastName: String,
+  sex: String,
+  eyes: String,
+  hair: String,
+  feet: String,
+  inch: String,
+  weight: String,
+  race: String,
+  from: Date,
+  to: Date,
+  image: String
+})
 
-var excPass = mongoose.model('passenger', passenger);
+const excPass = mongoose.model("passenger", passenger)
 
-
-//<img className="card-img-top" src={require({this.props.passenger.image})} alt="passenger"></img>
-//<img className="card-img-top" src={require("./uploads/ironcat.jpg")} alt="passenger"></img>
 //CREATE
-app.post('/add', upload.single('image'), function(request, response){
-	console.log(request.file);
-	var passenger = new excPass();
-	passenger.firstName = request.body.firstName;
-	passenger.lastName = request.body.lastName;
-	passenger.sex = request.body.sex;
-	passenger.eyes = request.body.eyes;
-	passenger.hair = request.body.hair;
-	passenger.feet = request.body.feet;
-	passenger.inch = request.body.inch;
-	passenger.weight = request.body.weight;
-	passenger.race = request.body.race;
-	passenger.from = request.body.from;
-	passenger.to = request.body.to;
-	passenger.image = "http://localhost:3001/" + request.file.originalname;
-	passenger.save(function(err, savedPassengers){
-		if (err) {
-			response.status(500).send({error: 'Could not save passenger info'});
-		} else {
-			console.log(passenger);
-		}
-		response.redirect('/addPage');
-	});
-});
+app.post("/add", upload.single("image"), function(request, response) {
+  console.log(request.file)
+  const passenger = new excPass()
+  passenger.firstName = request.body.firstName
+  passenger.lastName = request.body.lastName
+  passenger.sex = request.body.sex
+  passenger.eyes = request.body.eyes
+  passenger.hair = request.body.hair
+  passenger.feet = request.body.feet
+  passenger.inch = request.body.inch
+  passenger.weight = request.body.weight
+  passenger.race = request.body.race
+  passenger.from = request.body.from
+  passenger.to = request.body.to
+  passenger.image = request.file.originalname
+  passenger.save(function(err, savedPassengers) {
+    if (err) {
+      response.status(500).send({ error: "Could not save passenger info" })
+    } else {
+      console.log(passenger)
+    }
+    response.redirect("/addPage")
+  })
+})
 
 //READ
-app.get('/screen',function(request, response){
-	excPass.find({}, function(err, passengers){
-		if (err) {
-			console.log("Could not fetch");
-		} else {
-			response.send(passengers);
-		}
-	});
-});
+app.get("/screen", function(request, response) {
+  excPass.find({}, function(err, passengers) {
+    if (err) {
+      console.log("Could not fetch")
+    } else {
+      response.send(passengers)
+    }
+  })
+})
 
-app.get('/addPage', function (request, response {
-    response.render('adder');
-});
+app.get("/addPage", function(request, response) {
+  response.render("adder")
+})
 
-//UPDATE
-// app.post('/update',function(request, response){
-// 	
-// });
+app.get("/signage", function(request, response) {
+  excPass.find({}, function(err, passengers) {
+    if (err) {
+      console.log("Could not fetch")
+    } else {
+      response.render("signage", {
+        passengers: passengers
+      })
+    }
+  })
+})
 
-//DELETE
-// app.get('/delete',function(request, response){
-// 	
-// });
+app.get("/test", async (req, res, next) => {
+  try {
+    const [results, itemCount] = await Promise.all([
+      excPass
+        .find({})
+        .limit(6)
+        .skip(req.skip)
+        .lean()
+        .exec(),
+      excPass.count({})
+    ])
+
+    const pageCount = Math.ceil(itemCount / 6)
+
+    if (req.accepts("json")) {
+      res.json({
+        object: "list",
+        has_more: paginate.hasNextPages(req)(pageCount),
+        data: results
+      })
+    } else {
+      res.render("signage", {
+        passengers: results,
+        pageCount,
+        itemCount,
+        pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 app.listen(3001, function() {
-console.log("Passenger API running on port 3001...");
-});
+  console.log("Passenger API running on port 3001...")
+})
