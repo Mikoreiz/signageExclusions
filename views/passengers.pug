@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    body(style='background-color:#f3f3f3')
+        h1.display-3.mb-2(style="text-align:center") Passengers History
+        .row.justify-content-center
+            table.table.table-bordered.font-weight-light(style='width:92%; box-shadow: 7px 7px 6px 0px rgba(0,0,0,0.15);')
+                thead
+                    tr(style='background-color:black; color:white; text-align:center')
+                        th Name
+                        th Sex
+                        th Race
+                        th Eye Color
+                        th Hair Color
+                        th Height
+                        th Weight
+                        th Exlusion Period
+                tbody
+                    for passenger in passengers
+                        tr(style='text-align:center')
+                            td.font-weight-light #{passenger.firstName} #{passenger.lastName}
+                            td.font-weight-light #{passenger.sex}
+                            td.font-weight-light #{passenger.race}
+                            td.font-weight-light #{passenger.eyes}
+                            td.font-weight-light #{passenger.hair}
+                            td.font-weight-light #{passenger.feet}'#{passenger.inch}
+                            td.font-weight-light #{passenger.weight} lbs
+                            td.font-weight-light #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
+

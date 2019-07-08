@@ -103,6 +103,18 @@ app.get("/signage", function(request, response) {
   })
 })
 
+app.get("/passengers", function(request, response) {
+  excPass.find({}, function(err, passengers) {
+    if (err) {
+      console.log("Could not fetch")
+    } else {
+      response.render("passengers", {
+        passengers: passengers
+      })
+    }
+  })
+})
+
 app.listen(3001, function() {
   console.log("Passenger API running on port 3001...")
 })
