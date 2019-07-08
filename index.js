@@ -62,7 +62,6 @@ const passenger = new Schema({
 
 const excPass = mongoose.model("passenger", passenger)
 
-//CREATE
 app.post("/add", upload.single("image"), function(request, response) {
   console.log(request.file)
   const passenger = new excPass()
@@ -88,17 +87,6 @@ app.post("/add", upload.single("image"), function(request, response) {
   })
 })
 
-//READ
-app.get("/screen", function(request, response) {
-  excPass.find({}, function(err, passengers) {
-    if (err) {
-      console.log("Could not fetch")
-    } else {
-      response.send(passengers)
-    }
-  })
-})
-
 app.get("/addPage", function(request, response) {
   response.render("adder")
 })
@@ -113,39 +101,6 @@ app.get("/signage", function(request, response) {
       })
     }
   })
-})
-
-app.get("/test", async (req, res, next) => {
-  try {
-    const [results, itemCount] = await Promise.all([
-      excPass
-        .find({})
-        .limit(6)
-        .skip(req.skip)
-        .lean()
-        .exec(),
-      excPass.count({})
-    ])
-
-    const pageCount = Math.ceil(itemCount / 6)
-
-    if (req.accepts("json")) {
-      res.json({
-        object: "list",
-        has_more: paginate.hasNextPages(req)(pageCount),
-        data: results
-      })
-    } else {
-      res.render("signage", {
-        passengers: results,
-        pageCount,
-        itemCount,
-        pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
-      })
-    }
-  } catch (err) {
-    next(err)
-  }
 })
 
 app.listen(3001, function() {

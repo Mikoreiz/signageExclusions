@@ -1,45 +1,46 @@
 doctype html
 html
-	head
-		link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
-		script
-			include jquery-3.4.1.min.js
-			include scroll.js
-			include refresh.js
-	body(style='background-color:#f3f3f3')
-		.mb-5(style='text-align:center;')
-			h1.m-3.font-weight-bold.row.justify-content-center PASSENGERS EXCLUDED
-				div.container-fluid
-					.card-group
-						div.row.justify-content-center
-							for passenger in passengers
-								- var url = passenger.image
-								.card.m-2(style='width:28rem; height: auto; box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.15);')
-									h5.card-header.text-center.font-weight-bold(style='background-color: black; color:white;') #{passenger.firstName} #{passenger.lastName}
-									.row.justify-content-center
-										img.card-img-top.m-3(src=''+url+'', alt='passenger' style='height: 4em; width:auto;')
-									.border.border-danger.p-2.m-2.font-weight-light(style='font-size:.4em;')
-										.row.justify-content-center.pl-4
-											p.card-text.pr-2
-												b.font-weight-bold Sex:
-												|  #{passenger.sex}
-											p.card-text.pr-2.pl-2
-												b.font-weight-bold Race:
-												|  #{passenger.race}
-											p.card-text.pr-2.pl-1
-												b.font-weight-bold Eye Color:
-												|  #{passenger.eyes}
-										.row.justify-content-center.pl-2.pr-2
-											p.card-text.pl-3
-												b.font-weight-bold Hair Color:
-												|  #{passenger.sex}
-											p.card-text.pl-3
-												b.font-weight-bold Height:
-												|  #{passenger.feet}'#{passenger.inch}
-											p.card-text.pl-3
-												b.font-weight-bold Weight:
-												|  #{passenger.weight} lbs
-										.row.justify-content-center.pl-2.pr-2
-											p.font-weight-bold.card-text.pl-3(style='color:red')
-												b.font-weight-bold Excluded:
-												|  #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
+    head
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+        script
+            include jquery-3.4.1.min.js
+            include scroll.js
+            include refresh.js
+    body(style='background-color:#f3f3f3')
+        .mb-5(style='text-align:center;')
+            h1.m-3.font-weight-bold.row.justify-content-center PASSENGERS EXCLUDED
+                div.container-fluid
+                    .card-group
+                        div.row.justify-content-center
+                            for passenger in passengers
+                                if passenger.to > Date.now() 
+                                    - var url = passenger.image
+                                    .card.m-2(style='width:20rem; height: auto; box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.15);')
+                                        h5.card-header.text-center.font-weight-bold(style='background-color: black; color:white;') #{passenger.firstName} #{passenger.lastName}
+                                        .row.justify-content-center
+                                            img.card-img-top.m-3(src=''+url+'', alt='passenger' style='height: 3em; width:auto;')
+                                        .border.border-danger.p-2.m-2.font-weight-light(style='font-size:.3em;')
+                                            .row.justify-content-center.pl-4
+                                                p.card-text.pr-2
+                                                    b.font-weight-bold Sex:
+                                                    |  #{passenger.sex}
+                                                p.card-text.pr-2.pl-2
+                                                    b.font-weight-bold Race:
+                                                    |  #{passenger.race}
+                                                p.card-text.pr-2.pl-1
+                                                    b.font-weight-bold Eye Color:
+                                                    |  #{passenger.eyes}
+                                            .row.justify-content-center.pl-2.pr-2
+                                                p.card-text.pl-3
+                                                    b.font-weight-bold Hair Color:
+                                                    |  #{passenger.hair}
+                                                p.card-text.pl-3
+                                                    b.font-weight-bold Height:
+                                                    |  #{passenger.feet}'#{passenger.inch}
+                                                p.card-text.pl-3
+                                                    b.font-weight-bold Weight:
+                                                    |  #{passenger.weight} lbs
+                                            .row.justify-content-center.pl-2.pr-2
+                                                p.font-weight-bold.card-text.pl-3(style='color:red')
+                                                    b.font-weight-bold Excluded:
+                                                    |  #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
