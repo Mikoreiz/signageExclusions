@@ -1,2 +1,2 @@
 # signageExclusions
-Digital signage page of exluded passengers
+Digital signage page of excluded passengers
