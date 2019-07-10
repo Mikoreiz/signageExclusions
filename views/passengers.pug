@@ -9,21 +9,32 @@ html
                     .card-group
                         div.row.justify-content-center
                             for passenger in passengers
-                                input(type='hidden', name='id', value='passenger._id')
-                                if passenger.to > Date.now() 
-                                    - var url = passenger.image
-                                    - var editHref = '/editPass/' + passenger._id
-                                    .card.m-2(style='width:42rem; height: 4em; box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.15);')
-                                        .row.justify-content-start
-                                            img.pl-3.m-3(src=''+url+'', alt='passenger' style='height: 3em; width:auto;')
-                                        .card-body.ml-5
-                                            h6.card-title(style='font-size:.6em') #{passenger.firstName} #{passenger.lastName}
-                                            p.font-weight-light.card-text.pl-3(style='color:red; font-size:.4em')
-                                                b Excluded:
-                                                |  #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
-                                            .row.justify-content-center.font-weight-light(style='font-size:.4em')
-                                                a.mr-2(href=''+editHref+'', action='/editPass') 
-                                                    button.btn.btn-sm.btn-primary(type='button') Edit 
-                                                - var delAction = '/delete/' + passenger._id
-                                                form.ml-2(method='GET', action=''+delAction+'') 
-                                                    button.btn.btn-sm.btn-danger(type='submit') Delete                                                                    
+                                input(type='hidden', name='id', value='passenger._id') 
+                                - var url = passenger.image
+                                - var editHref = '/editPass/' + passenger._id
+                                .card.m-2(style='width:42rem; height: 4.5em; box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.15);')
+                                    .row.justify-content-start
+                                        img.pl-3.m-3.mr-5(src=''+url+'', alt='passenger' style='height: 3.5em; width:auto;')
+                                    .card-body.ml-5
+                                        .row.justify-content-center.font-weight-light
+                                            h6.card-title.ml-5(style='font-size:.6em') #{passenger.firstName} #{passenger.lastName}
+                                        .row.justify-content-center
+                                            - var status = ''
+                                            if passenger.to > Date.now()
+                                                - var status = 'Active'
+                                                p.font-weight-light.ml-5.mr-1(style='font-size:.4em') Exclusion:
+                                                b(style='font-size:.4em; color: blue') #{status}
+                                            else
+                                                - var status = 'Passed'
+                                                p.font-weight-light.ml-5.mr-1(style='font-size:.4em') Exclusion:
+                                                p(style='font-size:.4em; color: red') #{status}
+                                        .row.justify-content-center.font-weight-light(style='font-size:.4em')
+                                            p.card-text.pl-3.ml-5
+                                            b Period: 
+                                                |   #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
+                                        .row.justify-content-center.font-weight-light.mt-3(style='font-size:.4em')
+                                            a.mr-2.ml-5(href=''+editHref+'', action='/editPass') 
+                                                button.btn.btn-sm.btn-primary(type='button') Edit 
+                                            - var delAction = '/delete/' + passenger._id
+                                            form.ml-2(method='GET', action=''+delAction+'') 
+                                                button.btn.btn-sm.btn-danger(type='submit') Delete                                                                    
