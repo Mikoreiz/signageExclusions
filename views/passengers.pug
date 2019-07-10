@@ -3,28 +3,27 @@ html
     head
         link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
     body(style='background-color:#f3f3f3')
-        h1.display-3.mb-2(style="text-align:center") Passengers History
-        .row.justify-content-center
-            table.table.table-bordered.font-weight-light(style='width:92%; box-shadow: 7px 7px 6px 0px rgba(0,0,0,0.15);')
-                thead
-                    tr(style='background-color:black; color:white; text-align:center')
-                        th Name
-                        th Sex
-                        th Race
-                        th Eye Color
-                        th Hair Color
-                        th Height
-                        th Weight
-                        th Exlusion Period
-                tbody
-                    for passenger in passengers
-                        tr(style='text-align:center')
-                            td.font-weight-light #{passenger.firstName} #{passenger.lastName}
-                            td.font-weight-light #{passenger.sex}
-                            td.font-weight-light #{passenger.race}
-                            td.font-weight-light #{passenger.eyes}
-                            td.font-weight-light #{passenger.hair}
-                            td.font-weight-light #{passenger.feet}'#{passenger.inch}
-                            td.font-weight-light #{passenger.weight} lbs
-                            td.font-weight-light #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
-
+        .mb-5(style='text-align:center;')
+            h1.m-3.font-weight-bold.row.justify-content-center PASSENGER HISTORY
+                div.container-fluid
+                    .card-group
+                        div.row.justify-content-center
+                            for passenger in passengers
+                                input(type='hidden', name='id', value='passenger._id')
+                                if passenger.to > Date.now() 
+                                    - var url = passenger.image
+                                    - var editHref = '/editPass/' + passenger._id
+                                    .card.m-2(style='width:42rem; height: 4em; box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.15);')
+                                        .row.justify-content-start
+                                            img.pl-3.m-3(src=''+url+'', alt='passenger' style='height: 3em; width:auto;')
+                                        .card-body.ml-5
+                                            h6.card-title(style='font-size:.6em') #{passenger.firstName} #{passenger.lastName}
+                                            p.font-weight-light.card-text.pl-3(style='color:red; font-size:.4em')
+                                                b Excluded:
+                                                |  #{moment(passenger.from).format('MM/DD/YY')} - #{moment(passenger.to).format('MM/DD/YY')}
+                                            .row.justify-content-center.font-weight-light(style='font-size:.4em')
+                                                a.mr-2(href=''+editHref+'', action='/editPass') 
+                                                    button.btn.btn-sm.btn-primary(type='button') Edit 
+                                                - var delAction = '/delete/' + passenger._id
+                                                form.ml-2(method='GET', action=''+delAction+'') 
+                                                    button.btn.btn-sm.btn-danger(type='submit') Delete                                                                    

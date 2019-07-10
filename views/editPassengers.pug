@@ -1,0 +1,76 @@
+doctype html
+html
+    head
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    body(style='background-color:#f3f3f3')
+        h1.row.justify-content-center.mt-3 UPDATE INFORMATION
+        .row.justify-content-center
+            - var upAction = '/updatePass/' + passenger._id
+            form.card.mt-3(method='POST', action=''+upAction+'' style='box-shadow: 7px 7px 6px 0px rgba(0,0,0,0.15); width: 45em; height: 25em')
+                input(type='hidden', name='id', value='#{passenger._id}')
+                .row.ml-4.mt-3
+                    .col-md-4
+                        label First Name:
+                        input.form-control(type='text', name='upFirst', value=''+passenger.firstName+'' required) 
+                    .col-md-4
+                        label Last Name:
+                        input.form-control(type='text', name='upLast', value=''+passenger.lastName+'' required) 
+                    .col-md-3
+                        label Sex:
+                        select.form-control(type='text', name='upSex')
+                            option #{passenger.sex}
+                            if passenger.sex == 'Female'
+                                option Male 
+                            else
+                                option Female
+                .row.ml-4.mt-3
+                    .col-md-3
+                        label Eyes:
+                        input.form-control(type='text', name='upEyes', value=''+passenger.eyes+'' required)
+                    .col-md-3
+                        label Hair:
+                        input.form-control(type='text', name='upHair', value=''+passenger.hair+'' required)
+                    .col-md-2
+                        label Feet:
+                        select.form-control(type='text', name='Upfeet')
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option(selected='') 5
+                            option 6
+                            option 7
+                            option 8
+                    .col-md-2
+                        label Inches:
+                        select.form-control(type='text', name='inch')
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                            option 6
+                            option 7
+                            option 8
+                            option 9
+                            option 10
+                            option 11
+                .row.ml-4.mt-3
+                    .col-md-2
+                        label Weight:
+                        input.form-control(type='text', name='upWeight', value=''+passenger.weight+'' required)
+                    .col-md-3
+                        label Race:
+                        input.form-control(type='text', name='upRace', value=''+passenger.race+'' required) 
+                    .col-md-3
+                        label Excluded From:
+                        input.form-control(type='text', name='upFrom', value=''+moment(passenger.from).format('MM/DD/YY')+'' required)   
+                    .col-md-3
+                        label Excluded To:
+                        input.form-control(type='text', name='upTo', value=''+moment(passenger.to).format('MM/DD/YY')+'' required)                       
+                .row.justify-content-center.mb-4.mr-5.mt-5
+                    .col-md-1.mr-4
+                        button.btn.btn-primary(type='submit') Update
+                    .col-md-1.ml-4
+                        a(href='/passengers')
+                            button.btn.btn-dark(type='button') Cancel

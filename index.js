@@ -115,6 +115,58 @@ app.get("/passengers", function(request, response) {
   })
 })
 
+app.get("/editPass/:_id", function(request, response) {
+  excPass.findById({ _id: request.params._id }, function(err, passenger) {
+    if (err) {
+      console.log("Could not fetch")
+    } else {
+      response.render("editPassengers", {
+        passenger: passenger
+      })
+    }
+  })
+})
+
+app.post("/updatePass/:_id", function(request, response) {
+  var updatedPass = {
+    firstName: request.body.upFirst,
+    lastName: request.body.upLast,
+    sex: request.body.upSex,
+    eyes: request.body.upEyes,
+    hair: request.body.upHair,
+    feet: request.body.upFeet,
+    inch: request.body.upInch,
+    weight: request.body.upWeight,
+    race: request.body.upRace,
+    from: request.body.upFrom,
+    to: request.body.upTo
+  }
+  excPass.findOneAndUpdate(
+    { _id: request.params._id },
+    updatedPass,
+    { upsert: true },
+    function(err, passenger) {
+      if (err) {
+        console.log("Could not update")
+      } else {
+        console.log("Updated")
+        response.redirect("/passengers")
+      }
+    }
+  )
+})
+
+app.get("/delete/:_id", function(request, response) {
+  excPass.deleteOne({ _id: request.params._id }, function(err) {
+    if (err) {
+      console.log("Could not remove")
+    } else {
+      console.log("Removed")
+      response.redirect("/passengers")
+    }
+  })
+})
+
 app.listen(3001, function() {
   console.log("Passenger API running on port 3001...")
 })
