@@ -182,7 +182,7 @@ app.post("/updatePass/:_id", function(request, response) {
 })
 
 app.get("/delete/:_id", function(request, response) {
-  excPass.findByIdAndRemove({ _id: request.params._id }, function(
+  excPass.findOneAndDelete({ _id: request.params._id }, function(
     err,
     passenger
   ) {

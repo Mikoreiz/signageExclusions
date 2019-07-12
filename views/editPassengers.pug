@@ -3,7 +3,7 @@ html
     head
         link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
     body(style='background-color:#f3f3f3')
-        h1.row.justify-content-center.mt-3 UPDATE INFORMATION
+        h1.font-weight-bold.row.justify-content-center.mt-3 UPDATE INFORMATION
         .row.justify-content-center
             - var upAction = '/updatePass/' + passenger._id
             form.card.mt-3(method='POST', action=''+upAction+'' style='box-shadow: 7px 7px 6px 0px rgba(0,0,0,0.15); width: 45em; height: 25em')
@@ -33,17 +33,19 @@ html
                     .col-md-2
                         label Feet:
                         select.form-control(type='text', name='Upfeet')
+                            option(selected='') #{passenger.feet}
                             option 1
                             option 2
                             option 3
                             option 4
-                            option(selected='') 5
+                            option 5
                             option 6
                             option 7
                             option 8
                     .col-md-2
                         label Inches:
                         select.form-control(type='text', name='inch')
+                            option(selected='') #{passenger.inch}
                             option 1
                             option 2
                             option 3
