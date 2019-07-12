@@ -1,5 +1,4 @@
 const express = require("express")
-const paginate = require("express-paginate")
 const app = express()
 const path = require("path")
 const bodyParser = require("body-parser")
@@ -83,7 +82,7 @@ app.post("/add", upload.single("image"), function(request, response) {
     } else {
       console.log(passenger)
     }
-    response.redirect("/addPage")
+    response.redirect("/passengers")
   })
 })
 
@@ -107,6 +106,31 @@ app.get("/passengers", function(request, response) {
   excPass.find({}, function(err, passengers) {
     if (err) {
       console.log("Could not fetch")
+    } else {
+      response.render("passengers", {
+        passengers: passengers
+      })
+    }
+  })
+})
+
+app.get("/search", function(request, response) {
+  var searchFilter = {}
+  if (request.query.searchFirst) {
+    searchFilter["firstName"] = request.query.searchFirst
+  }
+  if (request.query.searchLast) {
+    searchFilter["lastName"] = request.query.searchLast
+  }
+  if (request.query.searchTo) {
+    searchFilter["to"] = {
+      $gte: request.query.searchFrom,
+      $lt: request.query.searchTo
+    }
+  }
+  excPass.find(searchFilter, function(err, passengers) {
+    if (err) {
+      response.status(500).send({ error: "Could not fetch data" })
     } else {
       response.render("passengers", {
         passengers: passengers
