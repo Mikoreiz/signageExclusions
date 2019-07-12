@@ -8,6 +8,7 @@ const db = mongoose.connect("mongodb://localhost/signageExclusion", {
 })
 const Schema = mongoose.Schema
 const multer = require("multer")
+const fs = require("fs")
 
 app.use(express.static(__dirname + "/public"))
 app.set("view engine", "pug")
@@ -181,12 +182,21 @@ app.post("/updatePass/:_id", function(request, response) {
 })
 
 app.get("/delete/:_id", function(request, response) {
-  excPass.deleteOne({ _id: request.params._id }, function(err) {
+  excPass.findByIdAndRemove({ _id: request.params._id }, function(
+    err,
+    passenger
+  ) {
     if (err) {
       console.log("Could not remove")
     } else {
-      console.log("Removed")
-      response.redirect("/passengers")
+      fs.unlink("./uploads/" + passenger["image"], err => {
+        if (err) {
+          console.log("Failed to delete image:" + err)
+        } else {
+          console.log("Removed")
+          response.redirect("/passengers")
+        }
+      })
     }
   })
 })
