@@ -13,27 +13,27 @@ html
           div.form-row.m-2
             div.form-group.col-sm-5.mr-2
               label First Name
-              input.form-control(type='text', name='firstName')
+              input.form-control(type='text', name='firstName' required)
             div.form-group.col-sm-5.ml-2
               label Last Name
-              input.form-control(type='text', name='lastName')
+              input.form-control(type='text', name='lastName' required)
           div.form-row.m-2
             div.form-group.col-sm-2.mr-2
               label Sex
-              select.form-control(type='text', name='sex')
+              select.form-control(type='text', name='sex' required)
                 option #{''}
-                option Male
-                option Female
+                option M
+                option F
             div.form-group.col-sm-4.ml-2.mr-2
               label Eye Color
-              input.form-control(type='text', name='eyes')
+              input.form-control(type='text', name='eyes' required)
             div.form-group.col-md-4.ml-2
               label Hair Color
-              input.form-control(type='text', name='hair')
+              input.form-control(type='text', name='hair' required)
           div.form-row.m-2
             div.form-group.col-sm-2.mr-2
               label Height
-              select.form-control(type='text', name='feet')
+              select.form-control(type='text', name='feet' required)
                 option 1
                 option 2
                 option 3
@@ -44,7 +44,7 @@ html
                 option 8
             div.form-group.col-sm-2.mr-2
               label(style='color:white;') .
-              select.form-control(type='text', name='inch')
+              select.form-control(type='text', name='inch' required)
                 option 1
                 option 2
                 option 3
@@ -58,22 +58,22 @@ html
                 option 11
             div.form-group.col-sm-2.mr-1.ml-2
               label Weight
-              input.form-control(type='text', name='weight')
+              input.form-control(type='text', name='weight' required)
             div.form-group.col-sm-4.ml-2
               label Race
-              input.form-control(type='text', name='race')
+              input.form-control(type='text', name='race' required)
           div.form-row.m-2
             div.form-group.col-sm-4.mr-2
               label Exclusion From
-              input.form-control(type='text', name='from' placeholder='MM/DD/YY')
+              input.form-control(type='text', name='from' placeholder='MM/DD/YY' required)
             div.form-group.col-sm-4.ml-2
               label To
-              input.form-control(type='text', name='to' placeholder='MM/DD/YY')
+              input.form-control(type='text', name='to' placeholder='MM/DD/YY' required)
           div.form-row.m-2
             div.col-sm-10.mr-2
               label Photo
             div.form-row.ml-1
-                input(type='file' name='image')
+                input(type='file' name='image' required)
           div.form-row.justify-content-center.mt-4.mr-4
             div.form-group.col-sm-3
               button.form-control.btn.btn-primary(type='submit') Submit

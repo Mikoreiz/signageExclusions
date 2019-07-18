@@ -8,23 +8,17 @@ html
     body(style='background-color:#f3f3f3')
         .mb-5(style='text-align:center;')
             h1.m-3.font-weight-bold.row.justify-content-center PASSENGER HISTORY
-                form.mt-4(method='GET', action='/search', style='font-size:.4em')
-                    .row.justify-content-center.mb-3
-                        .col-md-2
-                            label.font-weight-bold First Name: 
-                            input.form-control.ml-2(type='text' name='searchFirst') 
-                        .col-md-2
-                            label.font-weight-bold Last Name: 
-                            input.form-control.ml-2(type='text' name='searchLast') 
-                        .col-md-2
-                            label.font-weight-bold To: 
-                            input.form-control.ml-2(type='text' name='searchFrom' placeholder='MM/DD/YY')
-                        .col-md-2
-                            label.font-weight-bold From: 
-                            input.form-control.ml-2(type='text' name='searchTo' placeholder='MM/DD/YY')
-                        .col-md-1
-                            label.font-weight-bold Search:
-                            button.btn.btn-dark(type='submit') Go
+            form.mt-4(method='GET', action='/search', style='font-size:.4em')
+                .row.justify-content-center.mb-3
+                    .col-md-2
+                        label.font-weight-bold(style='font-size:2.3em') First Name: 
+                        input.form-control.ml-1(type='text' name='searchFirst') 
+                    .col-md-2
+                        label.font-weight-bold(style='font-size:2.3em') Last Name: 
+                        input.form-control.ml-1(type='text' name='searchLast') 
+                    .col-md-1
+                        label.font-weight-bold(style='font-size:2.3em') Search:
+                        button.btn.btn-dark(type='submit') Go
             div.container-fluid
                 .card-group
                     div.row.justify-content-center
@@ -39,15 +33,12 @@ html
                                     .row.justify-content-center.font-weight-light
                                         h6.card-title.ml-5(style='font-size:1em') #{passenger.firstName} #{passenger.lastName}
                                     .row.justify-content-center
-                                        - var status = ''
                                         if passenger.to > Date.now()
-                                            - var status = 'Active'
                                             p.font-weight-light.ml-5.mr-1(style='font-size:.8em') Exclusion:
-                                            b(style='font-size:.8em; color: blue') #{status}
+                                            b(style='font-size:.8em; color: blue') Active
                                         else
-                                            - var status = 'Passed'
                                             p.font-weight-light.ml-5.mr-1(style='font-size:.8em') Exclusion:
-                                            p(style='font-size:.8em; color: red') #{status}
+                                            p(style='font-size:.8em; color: red') Passed
                                     .row.justify-content-center.font-weight-light(style='font-size:.8em')
                                         p.card-text.pl-3.ml-5
                                         b Period: 

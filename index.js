@@ -123,12 +123,6 @@ app.get("/search", function(request, response) {
   if (request.query.searchLast) {
     searchFilter["lastName"] = request.query.searchLast
   }
-  if (request.query.searchTo) {
-    searchFilter["to"] = {
-      $gte: request.query.searchFrom,
-      $lt: request.query.searchTo
-    }
-  }
   excPass.find(searchFilter, function(err, passengers) {
     if (err) {
       response.status(500).send({ error: "Could not fetch data" })

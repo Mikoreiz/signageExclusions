@@ -19,10 +19,10 @@ html
                         label Sex:
                         select.form-control(type='text', name='upSex')
                             option #{passenger.sex}
-                            if passenger.sex == 'Female'
-                                option Male 
+                            if passenger.sex == 'F'
+                                option M
                             else
-                                option Female
+                                option F
                 .row.ml-4.mt-3
                     .col-md-3
                         label Eyes:
@@ -32,7 +32,7 @@ html
                         input.form-control(type='text', name='upHair', value=''+passenger.hair+'' required)
                     .col-md-2
                         label Feet:
-                        select.form-control(type='text', name='Upfeet')
+                        select.form-control(type='text', name='upFeet')
                             option(selected='') #{passenger.feet}
                             option 1
                             option 2
@@ -44,7 +44,7 @@ html
                             option 8
                     .col-md-2
                         label Inches:
-                        select.form-control(type='text', name='inch')
+                        select.form-control(type='text', name='upInch')
                             option(selected='') #{passenger.inch}
                             option 1
                             option 2
