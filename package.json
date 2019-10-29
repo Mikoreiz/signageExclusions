@@ -21,7 +21,7 @@
     "express": "^4.16.4",
     "express-paginate": "^1.0.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.21",
+    "mongoose": "^5.7.5",
     "multer": "^1.4.1",
     "pug": "^2.0.3",
     "tempusdominus-bootstrap-4": "^5.1.2"
